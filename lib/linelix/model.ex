@@ -8,7 +8,7 @@ defmodule Linelix.Model do
 
   defmodule Source do
     defstruct type: nil, userId: nil, groupId: nil, roomId: nil
-    @type t :: %User{type: binary, userId: binary, groupId: binary, roomId: binary}
+    @type t :: %Source{type: binary, userId: binary, groupId: binary, roomId: binary}
   end
 
   # defmodule Group do
@@ -21,12 +21,12 @@ defmodule Linelix.Model do
   #   @type t :: %Room{type: binary, roomId: binary, userId: binary}
   # end
 
-  defmodule User do
-    defstruct type: nil, userId: nil
-    @type t :: %User{type: binary, userId: binary}
-  end
+  # defmodule User do
+  #   defstruct type: nil, userId: nil
+  #   @type t :: %User{type: binary, userId: binary}
+  # end
 
-  defmodule MessageEvent do
+  defmodule Message do
     defstruct replyToken: nil, type: nil, timestamp: nil, source: nil, message: nil
     @type t :: %Message{replyToken: binary, type: binary, timestamp: integer, source: Source.t, message: TODO}
   end

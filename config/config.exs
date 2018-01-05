@@ -21,6 +21,9 @@ use Mix.Config
 #     config :logger, level: :info
 #
 
+config :linelix,
+  token: "j8NHSRpcD2SPAZ7/PGQksjrqF1k5Tmo2umre2g2Q278JgLUwpCueFhyjyd75egFID+UTn+JW+FMvpcjHEORk/v0+LpdZIzH+X1LSw3TLdyDbz1HR061Hzl4/HRFIa5n8h8HX6+BWKhPVocofmq5jcQdB04t89/1O/w1cDnyilFU="
+
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
 # by uncommenting the line below and defining dev.exs, test.exs and such.
