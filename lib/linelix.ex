@@ -1,18 +1,24 @@
 defmodule Linelix do
   @moduledoc """
-  Documentation for Linelix.
+  Provides access to LINE Bot API.
+
+  ## Reference
+  https://developers.line.me/en/docs/messaging-api/reference/#text
   """
 
-  @doc """
-  Hello world.
+  alias Linelix.Model.{User, Message, Update, UserProfilePhotos, File, Error}
 
-  ## Examples
+  import Linelix.API
 
-      iex> Linelix.hello
-      :world
+  def send_reply(reply_token, messages) do
+    request(:send_reply, reply_token, messages)# return
+  end
 
-  """
-  def hello do
-    :world
+  def send_push_message() do
+
+  end
+
+  def send_multicast_message() do
+
   end
 end
