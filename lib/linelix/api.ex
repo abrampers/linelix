@@ -8,7 +8,7 @@ defmodule Linelix.API do
 
   defp token, do: config_or_env(:token)
   defp recv_timeout, do: config_or_env(:recv_timeout) || @default_timeout
-  defp authorization(), do: ["Authorization": "Bearer #{token}"]
+  defp authorization, do: ["Authorization": String.Chars.to_string("Bearer #{token()}")]
   defp content_type("json"), do: ["Content-Type": "application/json"]
 
   defp config_or_env(key) do
@@ -46,6 +46,9 @@ defmodule Linelix.API do
       messages: messages
     }
     |> Poison.encode()
+
+    IO.inspect(body)
+    IO.inspect(authirization())
 
     @base_url <> "/message/reply"
     |> HTTPoison.post(body, content_type("json") ++ authorization())
