@@ -11,14 +11,18 @@ defmodule Linelix do
   import Linelix.API
 
   def send_reply(reply_token, messages) do
-    request(:send_reply, reply_token, messages)# return
+    request(:send_reply, reply_token, messages) |> response()# return
   end
 
-  def send_push_message() do
+  # def send_push_message() do
+  #   request(:send_reply, reply_token, messages) |> response()# return
+  # end
+  #
+  # def send_multicast_message() do
+  #   request(:send_reply, reply_token, messages) |> response()# return
+  # end
 
-  end
-
-  def send_multicast_message() do
-
+  defp response({:ok, response}) do
+     response |> Map.get(:body) |> Poison.decode!(keys: :atoms)
   end
 end
