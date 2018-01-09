@@ -21,7 +21,7 @@ defmodule Linelix.API do
   end
 
   defp convert_message({:sticker, package_id, sticker_id}) do
-    %{type: "sticker", packageId: String.Chars.to_string(package_id), stickerId: String.Chars.to_string(sticker_id)}# return
+    %{type: "sticker", packageId: package_id, stickerId: sticker_id}# return
   end
 
   defp convert_message({:image, original_content_url, preview_image_url}) do
@@ -41,7 +41,7 @@ defmodule Linelix.API do
   end
 
   def request(:send_reply, reply_token, messages) do
-    IO.puts("Request called")
+    IO.puts("send_reply called")
     messages = build_messages(messages)
 
     {:ok, body} =
@@ -52,6 +52,36 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/reply"
+    |> HTTPoison.post(body, @content_type_json ++ @authorization)
+  end
+
+  def request(:send_push_message, target_id, messages) do
+    IO.puts("send_push_message called")
+    messages = build_messages(messages)
+
+    {:ok, body} =
+    %{
+      to: target_id,
+      messages: messages
+    }
+    |> Poison.encode()
+
+    @base_url <> "/message/push"
+    |> HTTPoison.post(body, @content_type_json ++ @authorization)
+  end
+
+  def request(:send_multicast_message, target_ids, messages) do
+    IO.puts("send_multicast_message called")
+    messages = build_messages(messages)
+
+    {:ok, body} =
+    %{
+      to: target_ids,
+      messages: messages
+    }
+    |> Poison.encode()
+
+    @base_url <> "/message/multicast"
     |> HTTPoison.post(body, @content_type_json ++ @authorization)
   end
 end
