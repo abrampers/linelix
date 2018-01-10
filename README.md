@@ -57,8 +57,8 @@ config :linelix,
 - [X] Video
 - [X] Audio
 - [X] Location
-- [X] Imagemap message
-- [X] Template messages
+- [ ] Imagemap message
+- [ ] Template messages
 
 #### Profile
 - [ ] Get profile
