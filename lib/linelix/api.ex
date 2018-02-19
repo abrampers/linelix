@@ -50,7 +50,7 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/reply"
-    |> HTTPoison.post(body, @content_type_json ++ @authorization)
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
   end
 
   def request(:send_push_message, target_id, messages) do
@@ -65,7 +65,7 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/push"
-    |> HTTPoison.post(body, @content_type_json ++ @authorization)
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
   end
 
   def request(:send_multicast_message, target_ids, messages) do
