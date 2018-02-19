@@ -38,7 +38,7 @@ defmodule Linelix.API do
     %{type: "location", title: title, address: address, latitude: latitude, longitude: longitude}# return
   end
 
-  def request(:send_reply, reply_token, messages) do
+  def request(:send_reply, channel_access_token, reply_token, messages) do
     IO.puts("send_reply called")
     messages = build_messages(messages)
 
@@ -50,10 +50,10 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/reply"
-    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{channel_access_token}"])
   end
 
-  def request(:send_push_message, target_id, messages) do
+  def request(:send_push_message, channel_access_token, target_id, messages) do
     IO.puts("send_push_message called")
     messages = build_messages(messages)
 
@@ -65,10 +65,10 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/push"
-    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{channel_access_token}"])
   end
 
-  def request(:send_multicast_message, target_ids, messages) do
+  def request(:send_multicast_message, channel_access_token, target_ids, messages) do
     IO.puts("send_multicast_message called")
     messages = build_messages(messages)
 
@@ -80,6 +80,6 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/multicast"
-    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{channel_access_token}"])
   end
 end
