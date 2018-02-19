@@ -5,11 +5,9 @@ defmodule Linelix.API do
 
   # alias Linelix.Model.Error
 
-  @channel_access_token Application.get_env(:linelix, :token)
   @default_timeout 5
   @base_url "https://api.line.me/v2/bot"
   @content_type_json ["Content-Type": "application/json"]
-  @authorization ["Authorization": "Bearer #{@channel_access_token}"]
 
   defp build_messages(messages) do
     messages
@@ -82,6 +80,6 @@ defmodule Linelix.API do
     |> Poison.encode()
 
     @base_url <> "/message/multicast"
-    |> HTTPoison.post(body, @content_type_json ++ @authorization)
+    |> HTTPoison.post(body, @content_type_json ++ ["Authorization": "Bearer #{Application.get_env(:linelix, :token)}"])
   end
 end
